@@ -1,0 +1,16 @@
+
+Read file exception on closing window:
+
+$ jruby -I lib/ bin/main.rb
+{:filename=>"jFileFollow.prefs"}
+jFileFollow.prefs
+jFileFollow.prefs
+org/jruby/RubyIO.java:2422:in `readline'
+bin/main.rb:46:in `start'
+
+App wont close:
+    1. show preferences dialog
+    2. close preferences dialog
+    3. File -> Exit
+    
+    Hangs

@@ -1,0 +1,9 @@
+
+
+- Global Keywords
+Local Keywords
+  When setting local keywords, give option to override all global keywords
+  If local keywords is same as a global keyword, local overrides global keywords
+Store information about the file that was openned. Remember all local settings for that file.
+  Give option to not save information. Maybe during closing of that file?
+
