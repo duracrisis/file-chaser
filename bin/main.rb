@@ -7,7 +7,6 @@ require 'java'
 require 'pp'
 require 'optparse'
 require 'ui.jar'
-require 'FileFollower'
 require 'Preferences'
 require 'PreferencesDialog'
 require 'utils'
@@ -145,8 +144,7 @@ class MainFrame < com.bsi.filefollower.MainFrame
     getMntmOpen.addActionListener{|e|
       # We always store the last path the user visited as a convenience.
       
-      $prefs[:last_path].nil?
-      chooser = javax.swing.JFileChooser.new($prefs[:last_path])
+      chooser = javax.swing.JFileChooser.new($prefs[:last_path] || '')
 
       if chooser.showOpenDialog(nil) == javax.swing.JFileChooser::APPROVE_OPTION
         # Update the last path as the user may have changed it.
