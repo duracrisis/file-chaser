@@ -36,6 +36,7 @@ public class MainFrame extends JFrame {
 	private JSeparator separator_1;
 	private JMenu mnEdit;
 	private JMenuItem mntmPreferences;
+	private JMenuItem menu_item_License;
 
 	/**
 	 * Launch the application.
@@ -109,6 +110,7 @@ public class MainFrame extends JFrame {
 	public JMenu getMnHelp() {
 		if (mnHelp == null) {
 			mnHelp = new JMenu("Help");
+			mnHelp.add(getMenu_item_License());
 //			mnHelp.setHorizontalAlignment(SwingConstants.LEFT);
 			mnHelp.add(getMntmAbout());
 		}
@@ -164,5 +166,12 @@ public class MainFrame extends JFrame {
 			mntmPreferences = new JMenuItem("Preferences");
 		}
 		return mntmPreferences;
+	}
+	public JMenuItem getMenu_item_License() {
+		if (menu_item_License == null) {
+			menu_item_License = new JMenuItem("License");
+			menu_item_License.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, InputEvent.CTRL_MASK));
+		}
+		return menu_item_License;
 	}
 }

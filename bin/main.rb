@@ -190,7 +190,20 @@ class MainFrame < com.bsi.filefollower.MainFrame
       end
 
     }
-    
+
+    getMenu_item_License.add_action_listener{|e|
+
+      if @licensebox.nil?
+        @licensebox = Java::com.bsi.filefollower.DialogLicense.new
+        getDesktop.add(@licensebox)
+      end
+
+      if not @licensebox.visible
+        @licensebox.set_visible(true)
+      end
+
+    }
+
     getMntmCascade.add_action_listener{|e|
       do_cascade(getDesktop)
     }
