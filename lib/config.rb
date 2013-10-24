@@ -1,10 +1,10 @@
 
 
 $settings={
-  :title => 'jFilefollow',
+  :title => 'file-chaser',
   :version => '1.0',
-  :global_logger => Logger.new(File.new("jFilefollow.log","a")),
-  :prefs_path => "#{ENV['HOME']}/jFileFollow.prefs"
+  :global_logger => Logger.new(File.new("#{ENV['HOME']}/file-chaser.log","a")),
+  :prefs_path => "#{ENV['HOME']}/file-chaser.prefs"
 }  
 
 
