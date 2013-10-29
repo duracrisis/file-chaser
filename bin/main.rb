@@ -141,27 +141,35 @@ class MainFrame < com.bsi.filefollower.MainFrame
       java.lang.System.exit(0)
     end
 
-    getMntmOpen.addActionListener{|e|
+		getMntmOpen.addActionListener{|e|
       # We always store the last path the user visited as a convenience.
       
       chooser = javax.swing.JFileChooser.new($prefs[:last_path] || '')
 
       if chooser.showOpenDialog(nil) == javax.swing.JFileChooser::APPROVE_OPTION
-        # Update the last path as the user may have changed it.
-        $prefs[:last_path] = File.dirname(chooser.get_selected_file.to_s)
-        begin
-          $prefs.store
-        rescue Exception => e
-          $settings[:global_logger].error("Failed to write prefs: #{e}")
-        end
-
-        #create new internal frame to follow file
-        ff = RFileFollower.new :file => chooser.get_selected_file.to_s
-        ff.set_title chooser.get_selected_file.to_s
-        getDesktop.add ff
-        ff.set_visible true
-        ff.start
-      end
+			  if File.exists?(chooser.get_selected_file.to_s)
+          # Update the last path as the user may have changed it.
+          $prefs[:last_path] = File.dirname(chooser.get_selected_file.to_s)
+          begin
+            $prefs.store
+          rescue Exception => e
+            $settings[:global_logger].error("Failed to write prefs: #{e}")
+          end
+  
+          #create new internal frame to follow file
+  				begin
+    				ff = RFileFollower.new :file => chooser.get_selected_file.to_s
+    				ff.set_title chooser.get_selected_file.to_s
+    				getDesktop.add ff
+    				ff.set_visible true
+    				ff.start
+  				rescue Errno::EACCES
+  				  javax.swing.JOptionPane.showMessageDialog(nil, "File could not be opened. Access denied.", "Error", javax.swing.JOptionPane::OK_OPTION)
+  				end
+		  else
+  				  javax.swing.JOptionPane.showMessageDialog(nil, "File #{chooser.get_selected_file.to_s} does not exist.", "Error", javax.swing.JOptionPane::OK_OPTION)
+			end
+		 end
 
     }
 
